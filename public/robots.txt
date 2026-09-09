@@ -1,0 +1,6 @@
+# SUBRA House Service - robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://subra.in/sitemap.xml
