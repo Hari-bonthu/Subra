@@ -124,7 +124,7 @@ Ensure you have [Node.js](https://nodejs.org/) (version 20 or higher) and `npm` 
 
 ```bash
 # Clone the repository
-git clone https://github.com/<username>/Subra.git
+git clone https://github.com/Hari-bonthu/Subra.git
 
 # Navigate into the project directory
 cd Subra
