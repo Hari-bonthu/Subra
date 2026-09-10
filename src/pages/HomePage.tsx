@@ -12,6 +12,7 @@ import { FinalCta } from '../components/sections/FinalCta';
 import { ServiceCard } from '../components/ui/ServiceCard';
 import { Button } from '../components/ui/Button';
 import { RESIDENTIAL_SERVICES, COMMERCIAL_SERVICES } from '../data/siteData';
+import { usePageMeta } from '../hooks/usePageMeta';
 import type { ServiceItem } from '../types';
 
 interface HomePageProps {
@@ -23,6 +24,12 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenBooking,
   onSelectService,
 }) => {
+  usePageMeta({
+    title: 'SUBRA House Service — Shift, Clean, Renovate & Maintain | Rajahmundry',
+    description:
+      'Clinical-grade deep cleaning, house shifting turnover, and floor renovation based in Rajahmundry, serving East Godavari & Kakinada Districts. Verified squad & WhatsApp quotes.',
+  });
+
   const featuredResidential = RESIDENTIAL_SERVICES.slice(0, 3);
   const featuredCommercial = COMMERCIAL_SERVICES.slice(0, 3);
 
@@ -46,7 +53,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 Featured Cleaning Services
               </h2>
               <p className="font-sans text-[15px] sm:text-[16px] text-[#64748B] leading-[1.6] mt-3 max-w-[580px]">
-                Hospital-grade sanitization and precision maintenance tailored for residences and corporate workspaces across East Godavari.
+                Hospital-grade sanitization and precision maintenance tailored for residences and corporate workspaces across Rajahmundry, East Godavari & Kakinada Districts.
               </p>
             </div>
 

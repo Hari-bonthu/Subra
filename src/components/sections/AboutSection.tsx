@@ -29,7 +29,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
             </div>
 
             {/* Overlapping Experience Stat Card */}
-            <div className="absolute -bottom-6 -right-2 sm:-bottom-8 sm:right-6 z-10 max-w-[260px]">
+            <div className="absolute -bottom-6 right-2 sm:-bottom-8 sm:right-6 z-10 max-w-[260px]">
               <StatCard
                 icon={<Award className="w-5 h-5 text-[#16C2B0]" />}
                 value="100%"
@@ -72,8 +72,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
                   <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                 </div>
                 <div>
-                  <h4 className="font-display text-[15px] font-bold text-[#17212B]">Transparent Pricing</h4>
-                  <p className="font-sans text-[13px] text-[#64748B] mt-0.5">Fixed rates with zero hidden surcharges</p>
+                  <h4 className="font-display text-[15px] font-bold text-[#17212B]">Upfront Custom Quotes</h4>
+                  <p className="font-sans text-[13px] text-[#64748B] mt-0.5">Requirement-based rates with zero hidden surcharges</p>
                 </div>
               </div>
 

@@ -3,6 +3,7 @@ import { ArrowRight, ShieldCheck, Heart, Sparkles, CheckCircle2, HelpCircle } fr
 import { ServiceCard } from '../components/ui/ServiceCard';
 import { Button } from '../components/ui/Button';
 import { RESIDENTIAL_SERVICES, FAQ_ITEMS } from '../data/siteData';
+import { usePageMeta } from '../hooks/usePageMeta';
 import type { ServiceItem } from '../types';
 
 interface ResidentialPageProps {
@@ -14,11 +15,17 @@ export const ResidentialPage: React.FC<ResidentialPageProps> = ({
   onOpenBooking,
   onSelectService,
 }) => {
+  usePageMeta({
+    title: 'Residential House Cleaning Services in Rajahmundry | SUBRA',
+    description:
+      'Deep cleaning, bathroom descaling, kitchen degreasing, and sofa sanitization for flats and villas in Rajahmundry and East Godavari. Pet & child-safe bio compounds.',
+  });
+
   return (
     <div className="bg-[#F8FAFC] min-h-screen">
       {/* Header Section */}
       <section className="pt-12 pb-14 sm:pt-16 sm:pb-20 bg-white border-b border-[#E2E8F0]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-[840px]">
+        <div className="max-w-[840px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-display font-extrabold text-[36px] sm:text-[46px] lg:text-[52px] text-[#17212B] leading-[1.08] tracking-[-0.03em]">
             Residential Cleaning Services
           </h1>
@@ -192,7 +199,7 @@ export const ResidentialPage: React.FC<ResidentialPageProps> = ({
             Residential Cleaning FAQs
           </h2>
           <p className="font-sans text-[15px] text-[#64748B] mt-1">
-            Common questions from homeowners across Kakinada and Rajahmundry.
+            Common questions from homeowners across Rajahmundry, East Godavari, and Kakinada Districts.
           </p>
         </div>
 
@@ -226,7 +233,7 @@ export const ResidentialPage: React.FC<ResidentialPageProps> = ({
               Ready to restore your home to showroom freshness?
             </h3>
             <p className="font-sans text-[14px] text-[#94A3B8] mt-1">
-              Transparent pricing starts at just ₹699. Free rescheduling up to 2 hours before arrival.
+              Custom quotes tailored to your home layout. Free rescheduling up to 2 hours before arrival.
             </p>
           </div>
 
@@ -236,7 +243,7 @@ export const ResidentialPage: React.FC<ResidentialPageProps> = ({
             onClick={() => onOpenBooking()}
             icon={<ArrowRight className="w-4 h-4" />}
           >
-            Calculate Your Price
+            Get Custom Quote
           </Button>
         </div>
       </section>

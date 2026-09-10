@@ -1,52 +1,107 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, MessageSquare, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+import { isValidIndianPhone, formatIndianPhone } from '../utils/validation';
+import { usePageMeta } from '../hooks/usePageMeta';
+import { trackConversion } from '../utils/analytics';
 
 interface ContactPageProps {
   onOpenBooking: () => void;
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onOpenBooking }) => {
+  usePageMeta({
+    title: 'Contact & Dispatch Desk | SUBRA House Service Rajahmundry',
+    description:
+      'Contact Subra House Service in Rajahmundry. Call our dispatch hotlines +91 97043 80535 / +91 93924 30205 or chat directly on WhatsApp for customized cleaning quotes.',
+  });
+
   const [submitted, setSubmitted] = useState(false);
+  const [whatsappUrl, setWhatsappUrl] = useState('');
+  const [phoneError, setPhoneError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
-    city: 'Kakinada',
+    city: 'Rajahmundry',
     service: 'residential-deep',
     notes: '',
   });
 
+  const getServiceLabel = (val: string) => {
+    switch (val) {
+      case 'residential-deep':
+        return 'Residential Deep Cleaning';
+      case 'commercial-office':
+        return 'Commercial / Workplace Cleaning';
+      case 'floor-crystallization':
+        return 'Floor Renovation & Polishing';
+      case 'turnover-cleaning':
+        return 'Move-In / House Turnover Cleaning';
+      default:
+        return val;
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!isValidIndianPhone(formData.phone)) {
+      setPhoneError('Please enter a valid 10-digit Indian mobile number (e.g. 98765 43210)');
+      return;
+    }
+    setPhoneError('');
+
+    const text = `*New Contact Inquiry — SUBRA Website*\n` +
+      `--------------------------------------\n` +
+      `• *Name:* ${formData.name}\n` +
+      `• *Phone:* ${formatIndianPhone(formData.phone)}\n` +
+      (formData.email ? `• *Email:* ${formData.email}\n` : '') +
+      `• *City:* ${formData.city}\n` +
+      `• *Service Interest:* ${getServiceLabel(formData.service)}\n` +
+      (formData.notes ? `• *Message:* ${formData.notes}\n` : '') +
+      `--------------------------------------\n` +
+      `_Sent via subra.in contact form_`;
+
+    const url = `https://wa.me/919392430205?text=${encodeURIComponent(text)}`;
+    setWhatsappUrl(url);
     setSubmitted(true);
+
+    trackConversion('contact_inquiry_submit', {
+      source: 'contact_page_form',
+      city: formData.city,
+      service: formData.service,
+    });
+
+    // Open WhatsApp directly
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
     <div className="bg-[#F8FAFC] min-h-screen">
-      {/* Header Section */}
+      {/* Hero Header */}
       <section className="pt-12 pb-14 sm:pt-16 sm:pb-20 bg-white border-b border-[#E2E8F0]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-[840px]">
+        <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-display font-extrabold text-[36px] sm:text-[46px] lg:text-[52px] text-[#17212B] leading-[1.08] tracking-[-0.03em]">
-            Contact Subra House Service
+            Get In Touch With Subra
           </h1>
           <p className="font-sans text-[16px] sm:text-[18px] text-[#64748B] leading-[1.6] mt-4">
-            Connect directly with our founder-led dispatch team in East Godavari. We respond promptly with upfront quotes and flexible scheduling.
+            Have a custom requirement, need an urgent turn-around, or want a customized corporate proposal? Our supervisory team is ready to assist.
           </p>
         </div>
       </section>
 
-      {/* Main Contact Grid */}
-      <section className="py-16 sm:py-20 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Left Column: Direct Info Cards (5 Cols) */}
+      {/* Main Content: Info Cards & Form */}
+      <section className="py-14 sm:py-18 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          {/* Left Column: Direct Channels (5 Cols) */}
           <div className="lg:col-span-5 space-y-6">
             <div>
-              <h2 className="font-display font-extrabold text-[26px] sm:text-[30px] text-[#17212B] tracking-tight">
-                Direct Dispatch Channels
+              <h2 className="font-display font-bold text-[22px] sm:text-[26px] text-[#17212B] tracking-tight">
+                Direct Communication Lines
               </h2>
-              <p className="font-sans text-[14.5px] text-[#64748B] mt-1.5 leading-[1.6]">
-                Reach our team via call, WhatsApp, or email. We are available 7 days a week.
+              <p className="font-sans text-[14px] text-[#64748B] mt-1.5">
+                We respect your time. Reach out directly via call, WhatsApp, or email for prompt founder-level assistance.
               </p>
             </div>
 
@@ -56,13 +111,23 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenBooking }) => {
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-display font-bold text-[16px] text-[#17212B]">Toll-Free Dispatch</h3>
-                <a
-                  href="tel:+918842345678"
-                  className="font-display font-semibold text-[18px] text-[#16C2B0] hover:text-[#078F82] block mt-1"
-                >
-                  +91 884 234 5678
-                </a>
+                <h3 className="font-display font-bold text-[16px] text-[#17212B]">Direct Dispatch Lines</h3>
+                <div className="mt-1 space-y-0.5">
+                  <a
+                    href="tel:+919704380535"
+                    onClick={() => trackConversion('call_dispatch', { source: 'contact_page_card', phone: '+91 97043 80535' })}
+                    className="font-display font-semibold text-[17px] text-[#16C2B0] hover:text-[#078F82] block"
+                  >
+                    +91 97043 80535
+                  </a>
+                  <a
+                    href="tel:+919392430205"
+                    onClick={() => trackConversion('call_dispatch', { source: 'contact_page_card', phone: '+91 93924 30205' })}
+                    className="font-display font-semibold text-[17px] text-[#17212B] hover:text-[#16C2B0] block"
+                  >
+                    +91 93924 30205
+                  </a>
+                </div>
                 <p className="font-sans text-[12.5px] text-[#64748B] mt-1">Available 7:00 AM – 8:30 PM (Mon – Sun)</p>
               </div>
             </div>
@@ -75,15 +140,16 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenBooking }) => {
               <div>
                 <h3 className="font-display font-bold text-[16px] text-[#17212B]">WhatsApp Quick Help</h3>
                 <p className="font-sans text-[13px] text-[#64748B] mt-1">
-                  Send room photos or floor plans for instant estimate.
+                  Send room photos or floor plans for instant quote & slot confirmation.
                 </p>
                 <a
-                  href="https://wa.me/918842345678"
+                  href="https://wa.me/919392430205"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackConversion('whatsapp_click', { source: 'contact_page_card', phone: '+91 93924 30205' })}
                   className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-[#16C2B0] hover:text-[#078F82] mt-2"
                 >
-                  <span>Chat on WhatsApp</span>
+                  <span>Chat on WhatsApp (+91 93924 30205)</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>
@@ -113,7 +179,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenBooking }) => {
                 <span>Service Coverage Districts</span>
               </div>
               <p className="font-sans text-[13px] text-[#64748B] leading-[1.6]">
-                Headquartered in Kakinada with active mobile squads covering Rajahmundry, Amalapuram, Samalkota, Peddapuram, and neighboring communities.
+                Headquartered in Rajahmundry with active mobile squads covering East Godavari and Kakinada Districts (including Rajahmundry, Kakinada, Amalapuram, Samalkota, Peddapuram, and surrounding areas).
               </p>
             </div>
           </div>
@@ -129,32 +195,69 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenBooking }) => {
               </p>
 
               {submitted ? (
-                <div className="p-8 bg-[#ECFDF9] border border-[#16C2B0]/30 rounded-[8px] text-center">
-                  <div className="w-12 h-12 rounded-full bg-[#16C2B0] text-white flex items-center justify-center mx-auto mb-3">
-                    <CheckCircle2 className="w-6 h-6" />
+                <div className="p-8 bg-[#ECFDF9] border border-[#16C2B0]/30 rounded-[8px] text-center space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-[#16C2B0] text-white flex items-center justify-center mx-auto shadow-sm">
+                    <CheckCircle2 className="w-7 h-7" />
                   </div>
-                  <h3 className="font-display font-bold text-[20px] text-[#17212B]">Message Received!</h3>
-                  <p className="font-sans text-[14px] text-[#078F82] mt-1 max-w-[400px] mx-auto">
-                    Thank you {formData.name}. Our dispatch manager will contact you shortly at {formData.phone}.
+                  <h3 className="font-display font-bold text-[22px] text-[#17212B]">
+                    Inquiry Prepared for WhatsApp!
+                  </h3>
+                  <p className="font-sans text-[14px] text-[#64748B] max-w-[440px] mx-auto leading-relaxed">
+                    Thank you <strong className="text-[#17212B]">{formData.name}</strong>. If WhatsApp did not open automatically, tap below to send your details directly to our dispatch supervisor:
                   </p>
-                  <Button
-                    variant="outline-teal"
-                    size="sm"
-                    className="mt-5"
-                    onClick={() => {
-                      setSubmitted(false);
-                      setFormData({
-                        name: '',
-                        phone: '',
-                        email: '',
-                        city: 'Kakinada',
-                        service: 'residential-deep',
-                        notes: '',
-                      });
-                    }}
-                  >
-                    Send Another Message
-                  </Button>
+
+                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-[420px] mx-auto">
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto flex-1"
+                    >
+                      <Button
+                        variant="primary"
+                        size="md"
+                        fullWidth
+                        icon={<MessageSquare className="w-4 h-4" />}
+                        className="bg-[#25D366] hover:bg-[#1EBE5D] border-transparent shadow-sm text-[13.5px]"
+                      >
+                        Continue on WhatsApp
+                      </Button>
+                    </a>
+
+                    <a href="tel:+919704380535" className="w-full sm:w-auto flex-1">
+                      <Button
+                        variant="secondary"
+                        size="md"
+                        fullWidth
+                        icon={<Phone className="w-4 h-4 text-[#16C2B0]" />}
+                        className="text-[13.5px]"
+                      >
+                        Call Dispatch
+                      </Button>
+                    </a>
+                  </div>
+
+                  <div className="pt-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSubmitted(false);
+                        setWhatsappUrl('');
+                        setPhoneError('');
+                        setFormData({
+                          name: '',
+                          phone: '',
+                          email: '',
+                          city: 'Rajahmundry',
+                          service: 'residential-deep',
+                          notes: '',
+                        });
+                      }}
+                      className="text-[13px] text-[#64748B] hover:text-[#17212B] underline cursor-pointer"
+                    >
+                      Send another message
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -181,10 +284,22 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenBooking }) => {
                         type="tel"
                         required
                         value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        onChange={(e) => {
+                          setFormData({ ...formData, phone: e.target.value });
+                          if (phoneError) setPhoneError('');
+                        }}
                         placeholder="+91 98765 43210"
-                        className="w-full px-3.5 py-2.5 text-[14px] bg-[#F8FAFC] border border-[#E2E8F0] rounded-[6px] text-[#17212B] focus:border-[#16C2B0] focus:bg-white focus:outline-none transition-all"
+                        className={`w-full px-3.5 py-2.5 text-[14px] bg-[#F8FAFC] border rounded-[6px] text-[#17212B] outline-none transition-all ${
+                          phoneError
+                            ? 'border-red-500 focus:border-red-500 focus:bg-white'
+                            : 'border-[#E2E8F0] focus:border-[#16C2B0] focus:bg-white'
+                        }`}
                       />
+                      {phoneError && (
+                        <p className="font-sans text-[12px] text-red-600 mt-1 font-medium">
+                          {phoneError}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -198,8 +313,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenBooking }) => {
                         onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                         className="w-full px-3.5 py-2.5 text-[14px] bg-[#F8FAFC] border border-[#E2E8F0] rounded-[6px] text-[#17212B] focus:border-[#16C2B0] focus:bg-white focus:outline-none transition-all"
                       >
-                        <option value="Kakinada">Kakinada</option>
                         <option value="Rajahmundry">Rajahmundry</option>
+                        <option value="Kakinada">Kakinada</option>
                         <option value="Amalapuram">Amalapuram</option>
                         <option value="Samalkota">Samalkota</option>
                         <option value="Other">Other (East Godavari)</option>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Clock, Check } from 'lucide-react';
+import { ArrowRight, Sparkles, Check } from 'lucide-react';
 import type { ServiceItem } from '../../types';
 
 interface ServiceCardProps {
@@ -36,13 +36,6 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             {service.tag}
           </span>
         </div>
-
-        {/* Price Pill */}
-        <div className="absolute top-3.5 right-3.5 z-10">
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-[4px] text-[12px] font-bold font-display bg-[#17212B]/85 text-white backdrop-blur-xs border border-white/10">
-            {service.startingPrice}
-          </span>
-        </div>
       </div>
 
       {/* Overlapping White Information Panel */}
@@ -71,9 +64,9 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 
         {/* Action Row */}
         <div className="mt-4 pt-3 border-t border-[#F1F5F4] flex items-center justify-between">
-          <div className="flex items-center text-[12px] text-[#94A3B8]">
-            <Clock className="w-3.5 h-3.5 mr-1 text-[#64748B]" />
-            <span>{service.duration}</span>
+          <div className="flex items-center text-[12px] text-[#078F82] font-medium">
+            <Sparkles className="w-3.5 h-3.5 mr-1 text-[#16C2B0]" />
+            <span>Custom Quote</span>
           </div>
 
           <div className="flex items-center gap-2.5">
@@ -91,7 +84,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 
             <button
               type="button"
-              className="px-2.5 py-1 text-[12px] font-semibold rounded-[4px] bg-[#ECFDF9] text-[#078F82] hover:bg-[#16C2B0] hover:text-white transition-colors duration-150 cursor-pointer border border-[#D6F8F2]"
+              className="px-3.5 py-1.5 min-h-[36px] text-[12.5px] font-semibold rounded-[4px] bg-[#ECFDF9] text-[#078F82] hover:bg-[#16C2B0] hover:text-white transition-colors duration-150 cursor-pointer border border-[#D6F8F2] flex items-center justify-center"
               onClick={(e) => {
                 e.stopPropagation();
                 onBook(service);

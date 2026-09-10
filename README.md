@@ -1,7 +1,7 @@
 # Subra House Service
 
 > **Shift • Clean • Renovate • Maintain**  
-> Modern, founder-supervised clinical hygiene, shifting turnover, floor renovation, and scheduled maintenance for homes and workplaces across East Godavari (Kakinada, Rajahmundry, Amalapuram, and Samalkota).
+> Modern, founder-supervised clinical hygiene, shifting turnover, floor renovation, and scheduled maintenance based in Rajahmundry, serving East Godavari and Kakinada Districts.
 
 [![Deploy to GitHub Pages](https://github.com/actions/checkout/actions/workflows/deploy.yml/badge.svg)](https://github.com)
 [![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react&logoColor=black)](https://react.dev)
@@ -34,13 +34,13 @@ The application utilizes `react-router-dom` with automatic top scroll restoratio
 | `/commercial` | **For Business** | 6 commercial solutions (Office, Floor Crystallization, Pathogen Disinfection, Waste Removal, Post-Event Turnover, Janitorial SLAs), and an interactive RFP proposal request form. |
 | `/about` | **About Subra** | Founding origin story in East Godavari, 4 core startup pillars, and founder satisfaction guarantee. |
 | `/process` | **Our Process** | 3-step booking-to-sparkle journey and 42-point supervisor checklist across 4 distinct inspection phases. |
-| `/contact` | **Contact & Dispatch** | Toll-free hotline (`+91 884 234 5678`), direct WhatsApp link, service coverage map, and interactive callback request form. |
+| `/contact` | **Contact & Dispatch** | Direct dispatch lines (`+91 97043 80535` / `+91 93924 30205`), direct WhatsApp forwarding (`+91 93924 30205`), service coverage zones, and interactive inquiry form. |
 
 ---
 
 ## Key Features
 
-- **Interactive Booking & Instant Estimator Modal**: Dynamic multi-step quote calculator allowing users to select rooms, square footage, property type, and date with immediate price calculations.
+- **Interactive Booking & Custom Quote Modal**: Dynamic multi-step inquiry flow allowing users to select rooms, square footage, property type, preferred slot, and automatically forward structured requirements to WhatsApp for instant customized quotes.
 - **Service Detail Specification Modal**: Deep-dive specification modal for every service detailing what's included, estimated duration, equipment used, and booking triggers.
 - **Dynamic Real-Time Filtering**: Filter all 12 services by category or query string instantly.
 - **Clean Typography (No-Eyebrow Design)**: Headings stand on their own with editorial hierarchy using Manrope and Inter without uppercase eyebrow tag clutter.

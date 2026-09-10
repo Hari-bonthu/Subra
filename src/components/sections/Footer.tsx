@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, ArrowUp } from 'lucide-react';
+import { trackConversion } from '../../utils/analytics';
 
-export const Footer: React.FC = () => {
+export interface FooterProps {
+  onOpenPolicy?: (tab: 'terms' | 'cancellation' | 'guarantee') => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenPolicy }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -52,13 +57,27 @@ export const Footer: React.FC = () => {
             <div className="mt-6 space-y-2.5 text-[13.5px]">
               <div className="flex items-center gap-2.5 text-white/90">
                 <MapPin className="w-4 h-4 text-[#16C2B0] shrink-0" />
-                <span>Kakinada, Rajahmundry & East Godavari District</span>
+                <span>Rajahmundry, East Godavari & Kakinada Districts</span>
               </div>
               <div className="flex items-center gap-2.5 text-white/90">
                 <Phone className="w-4 h-4 text-[#16C2B0] shrink-0" />
-                <a href="tel:+918842345678" className="hover:text-[#16C2B0] transition-colors">
-                  +91 884 234 5678 (Toll Free Dispatch)
-                </a>
+                <div className="flex flex-wrap items-center gap-x-2">
+                  <a
+                    href="tel:+919704380535"
+                    onClick={() => trackConversion('call_dispatch', { source: 'footer', phone: '+91 97043 80535' })}
+                    className="hover:text-[#16C2B0] transition-colors"
+                  >
+                    +91 97043 80535
+                  </a>
+                  <span className="text-white/40">/</span>
+                  <a
+                    href="tel:+919392430205"
+                    onClick={() => trackConversion('call_dispatch', { source: 'footer', phone: '+91 93924 30205' })}
+                    className="hover:text-[#16C2B0] transition-colors"
+                  >
+                    +91 93924 30205
+                  </a>
+                </div>
               </div>
               <div className="flex items-center gap-2.5 text-white/90">
                 <Mail className="w-4 h-4 text-[#16C2B0] shrink-0" />
@@ -149,9 +168,19 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-[14px] font-sans">
               <li>
-                <Link to="/process" className="hover:text-[#16C2B0] transition-colors">
-                  Help Center & Guarantee
-                </Link>
+                {onOpenPolicy ? (
+                  <button
+                    type="button"
+                    onClick={() => onOpenPolicy('guarantee')}
+                    className="hover:text-[#16C2B0] transition-colors text-left"
+                  >
+                    Help Center & Guarantee
+                  </button>
+                ) : (
+                  <Link to="/process" className="hover:text-[#16C2B0] transition-colors">
+                    Help Center & Guarantee
+                  </Link>
+                )}
               </li>
               <li>
                 <Link to="/process" className="hover:text-[#16C2B0] transition-colors">
@@ -164,14 +193,34 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-[#16C2B0] transition-colors">
-                  Terms of Service
-                </Link>
+                {onOpenPolicy ? (
+                  <button
+                    type="button"
+                    onClick={() => onOpenPolicy('terms')}
+                    className="hover:text-[#16C2B0] transition-colors text-left"
+                  >
+                    Terms of Service
+                  </button>
+                ) : (
+                  <Link to="/contact" className="hover:text-[#16C2B0] transition-colors">
+                    Terms of Service
+                  </Link>
+                )}
               </li>
               <li>
-                <Link to="/contact" className="hover:text-[#16C2B0] transition-colors">
-                  Cancellation Policy
-                </Link>
+                {onOpenPolicy ? (
+                  <button
+                    type="button"
+                    onClick={() => onOpenPolicy('cancellation')}
+                    className="hover:text-[#16C2B0] transition-colors text-left"
+                  >
+                    Cancellation Policy
+                  </button>
+                ) : (
+                  <Link to="/contact" className="hover:text-[#16C2B0] transition-colors">
+                    Cancellation Policy
+                  </Link>
+                )}
               </li>
             </ul>
           </div>

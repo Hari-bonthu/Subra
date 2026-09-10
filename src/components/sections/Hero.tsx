@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Star, CheckCircle2 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { StatCard } from '../ui/StatCard';
+import { trackConversion } from '../../utils/analytics';
 
 
 
@@ -41,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
             </div>
 
             {/* Overlapping Floating Stat Badge (Desktop / Tablet) */}
-            <div className="absolute -bottom-6 -right-2 sm:-bottom-7 sm:right-6 z-20 max-w-[280px]">
+            <div className="absolute -bottom-6 right-2 sm:-bottom-7 sm:right-6 z-20 max-w-[270px]">
               <StatCard
                 icon={<Star className="w-5 h-5 fill-[#16C2B0] text-[#16C2B0]" />}
                 value="100%"
@@ -98,7 +99,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               <Button
                 variant="primary"
                 size="lg"
-                onClick={onOpenBooking}
+                onClick={() => {
+                  trackConversion('booking_modal_open', { source: 'hero_primary_cta' });
+                  onOpenBooking();
+                }}
                 icon={<ArrowRight className="w-4 h-4" />}
                 className="w-full sm:w-auto"
               >

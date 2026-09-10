@@ -7,8 +7,8 @@ export interface ServiceItem {
   image: string;
   imageAlt: string;
   features: string[];
-  startingPrice: string;
-  duration: string;
+  startingPrice?: string;
+  duration?: string;
   tag: string;
 }
 

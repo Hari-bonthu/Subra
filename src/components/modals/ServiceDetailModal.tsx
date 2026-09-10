@@ -1,8 +1,7 @@
-import React from 'react';
-import { X, Check, Clock, ShieldCheck, ArrowRight } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { X, Check, Sparkles, ShieldCheck, ArrowRight } from 'lucide-react';
 import type { ServiceItem } from '../../types';
 import { Button } from '../ui/Button';
-
 
 interface ServiceDetailModalProps {
   service: ServiceItem | null;
@@ -17,15 +16,26 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
   onClose,
   onBook,
 }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen || !service) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#17212B]/60 backdrop-blur-xs overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#17212B]/60 backdrop-blur-xs overflow-y-auto"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-xl bg-white rounded-[8px] shadow-[0_24px_60px_rgba(23,33,43,0.2)] border border-[#E2E8F0] overflow-hidden my-6"
+        className="relative w-full max-w-xl bg-white rounded-[8px] shadow-[0_24px_60px_rgba(23,33,43,0.2)] border border-[#E2E8F0] overflow-hidden my-auto max-h-[92vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Banner Image */}
@@ -41,7 +51,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="absolute top-4 right-4 p-1.5 rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors backdrop-blur-xs"
+            className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors backdrop-blur-xs cursor-pointer"
             aria-label="Close"
           >
             <X className="w-5 h-5" />
@@ -59,7 +69,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
         </div>
 
         {/* Modal Details Body */}
-        <div className="p-6">
+        <div className="p-6 overflow-y-auto">
           <p className="font-sans text-[15px] text-[#64748B] leading-relaxed">
             {service.description}
           </p>
@@ -67,14 +77,14 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
           {/* Key Specs */}
           <div className="grid grid-cols-2 gap-3 my-5 p-3.5 bg-[#F8FAFC] rounded-[6px] border border-[#E2E8F0]">
             <div className="flex items-center gap-2 text-[13px]">
-              <Clock className="w-4 h-4 text-[#16C2B0]" />
-              <span className="text-[#64748B]">Duration:</span>
-              <span className="font-semibold text-[#17212B]">{service.duration}</span>
+              <Sparkles className="w-4 h-4 text-[#16C2B0]" />
+              <span className="text-[#64748B]">Scope:</span>
+              <span className="font-semibold text-[#17212B]">Tailored to Requirement</span>
             </div>
             <div className="flex items-center gap-2 text-[13px]">
               <ShieldCheck className="w-4 h-4 text-[#16C2B0]" />
-              <span className="text-[#64748B]">Pricing:</span>
-              <span className="font-bold text-[#078F82]">From {service.startingPrice}</span>
+              <span className="text-[#64748B]">Quality:</span>
+              <span className="font-bold text-[#078F82]">Founder Supervised</span>
             </div>
           </div>
 
@@ -114,7 +124,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
               }}
               icon={<ArrowRight className="w-4 h-4" />}
             >
-              Book This Service ({service.startingPrice})
+              Book This Service
             </Button>
           </div>
         </div>

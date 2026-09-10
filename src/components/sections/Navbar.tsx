@@ -3,6 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { Menu, X, Phone, ArrowRight } from 'lucide-react';
 import { NAV_LINKS } from '../../data/siteData';
 import { Button } from '../ui/Button';
+import { trackConversion } from '../../utils/analytics';
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -20,6 +21,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <>
@@ -89,18 +101,32 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
           {/* Right Desktop CTA */}
           <div className="hidden lg:flex items-center gap-4">
-            <a
-              href="tel:+918842345678"
-              className="hidden xl:flex items-center gap-2 text-[13px] font-medium text-[#64748B] hover:text-[#17212B] transition-colors"
-            >
+            <div className="hidden xl:flex items-center gap-2 text-[13px] font-medium text-[#64748B]">
               <Phone className="w-3.5 h-3.5 text-[#16C2B0]" />
-              <span>+91 884 234 5678</span>
-            </a>
+              <a
+                href="tel:+919704380535"
+                onClick={() => trackConversion('call_dispatch', { source: 'navbar_desktop', phone: '+91 97043 80535' })}
+                className="hover:text-[#17212B] transition-colors"
+              >
+                +91 97043 80535
+              </a>
+              <span className="text-[#CBD5E1]">/</span>
+              <a
+                href="tel:+919392430205"
+                onClick={() => trackConversion('call_dispatch', { source: 'navbar_desktop', phone: '+91 93924 30205' })}
+                className="hover:text-[#17212B] transition-colors"
+              >
+                +91 93924 30205
+              </a>
+            </div>
 
             <Button
               variant="primary"
               size="md"
-              onClick={onOpenBooking}
+              onClick={() => {
+                trackConversion('booking_modal_open', { source: 'navbar_desktop' });
+                onOpenBooking();
+              }}
               icon={<ArrowRight className="w-4 h-4" />}
             >
               Get a Quote
@@ -137,7 +163,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           onClick={() => setMobileMenuOpen(false)}
         >
           <div
-            className="fixed top-0 right-0 bottom-0 w-[300px] max-w-[85vw] bg-white p-6 shadow-2xl flex flex-col justify-between border-l border-[#E2E8F0]"
+            className="fixed top-0 right-0 bottom-0 w-[300px] max-w-[85vw] bg-white p-6 shadow-2xl flex flex-col justify-between border-l border-[#E2E8F0] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div>
@@ -205,18 +231,30 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
                 fullWidth
                 onClick={() => {
                   setMobileMenuOpen(false);
+                  trackConversion('booking_modal_open', { source: 'navbar_mobile_drawer' });
                   onOpenBooking();
                 }}
               >
                 Book a Cleaning
               </Button>
-              <a
-                href="tel:+918842345678"
-                className="flex items-center justify-center gap-2 py-2.5 text-[13px] font-medium text-[#64748B] hover:text-[#17212B]"
-              >
+              <div className="flex items-center justify-center gap-2.5 py-2.5 text-[13px] font-medium text-[#64748B]">
                 <Phone className="w-4 h-4 text-[#16C2B0]" />
-                <span>+91 884 234 5678</span>
-              </a>
+                <a
+                  href="tel:+919704380535"
+                  onClick={() => trackConversion('call_dispatch', { source: 'navbar_mobile_drawer', phone: '+91 97043 80535' })}
+                  className="hover:text-[#17212B]"
+                >
+                  +91 97043 80535
+                </a>
+                <span className="text-[#CBD5E1]">/</span>
+                <a
+                  href="tel:+919392430205"
+                  onClick={() => trackConversion('call_dispatch', { source: 'navbar_mobile_drawer', phone: '+91 93924 30205' })}
+                  className="hover:text-[#17212B]"
+                >
+                  +91 93924 30205
+                </a>
+              </div>
             </div>
           </div>
         </div>

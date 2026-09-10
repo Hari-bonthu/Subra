@@ -23,8 +23,8 @@ export const TRUST_STRIP_ITEMS: TrustItem[] = [
   },
   {
     icon: 'Clock',
-    title: 'Transparent Flat Pricing',
-    description: 'No hidden surcharges. Book in 60s with free slot changes',
+    title: 'Requirement-Based Quotes',
+    description: 'Upfront customized pricing with zero hidden surcharges',
   },
 ];
 
@@ -43,8 +43,6 @@ export const RESIDENTIAL_SERVICES: ServiceItem[] = [
       'Floor sweeping & microfiber wet mopping',
       'Waste bin emptying & bag replacement'
     ],
-    startingPrice: '₹1,199',
-    duration: '2.5 - 3 Hours',
     tag: 'Popular'
   },
   {
@@ -61,8 +59,6 @@ export const RESIDENTIAL_SERVICES: ServiceItem[] = [
       'High ceiling corners & lighting fixtures',
       'Door frames, window tracks & switchplates'
     ],
-    startingPrice: '₹2,499',
-    duration: '4 - 6 Hours',
     tag: 'Signature'
   },
   {
@@ -79,8 +75,6 @@ export const RESIDENTIAL_SERVICES: ServiceItem[] = [
       'Mirror, glass door & chrome polishing',
       'Drain disinfestation & odor neutralizer'
     ],
-    startingPrice: '₹899',
-    duration: '1.5 - 2 Hours',
     tag: 'Essential'
   },
   {
@@ -97,8 +91,6 @@ export const RESIDENTIAL_SERVICES: ServiceItem[] = [
       'Exterior cleaning of microwave & fridge',
       'Stainless steel sink bactericidal scrub'
     ],
-    startingPrice: '₹1,499',
-    duration: '2 - 3 Hours',
     tag: 'High Demand'
   },
   {
@@ -115,8 +107,6 @@ export const RESIDENTIAL_SERVICES: ServiceItem[] = [
       'Italian marble & vitrified tile damp polish',
       'Edge & corner dust extraction'
     ],
-    startingPrice: '₹799',
-    duration: '1.5 Hours',
     tag: 'Quick'
   },
   {
@@ -133,8 +123,6 @@ export const RESIDENTIAL_SERVICES: ServiceItem[] = [
       'Bookshelf & console surface care',
       'Zero chemical scratch-free cloths'
     ],
-    startingPrice: '₹699',
-    duration: '1 - 2 Hours',
     tag: 'Care'
   }
 ];
@@ -154,8 +142,6 @@ export const COMMERCIAL_SERVICES: ServiceItem[] = [
       'Pantry hygiene & coffee station deep clean',
       'Daily, bi-weekly or custom shift schedules'
     ],
-    startingPrice: '₹4,999 / mo',
-    duration: 'Custom Contract',
     tag: 'Office'
   },
   {
@@ -172,8 +158,6 @@ export const COMMERCIAL_SERVICES: ServiceItem[] = [
       'Slip-resistant industrial gloss sealant',
       'Grout line deep chemical extraction'
     ],
-    startingPrice: '₹3,500',
-    duration: 'Per 1000 Sq Ft',
     tag: 'Specialized'
   },
   {
@@ -190,8 +174,6 @@ export const COMMERCIAL_SERVICES: ServiceItem[] = [
       '99.999% microbial clearance standard',
       'Safe for electronics, monitors & paperwork'
     ],
-    startingPrice: '₹2,200',
-    duration: '1 - 3 Hours',
     tag: 'Clinical'
   },
   {
@@ -208,8 +190,6 @@ export const COMMERCIAL_SERVICES: ServiceItem[] = [
       'Confidential document safe disposal',
       'Scheduled daily or weekly removal cycles'
     ],
-    startingPrice: '₹1,800 / mo',
-    duration: 'Contractual',
     tag: 'Eco-System'
   },
   {
@@ -226,8 +206,6 @@ export const COMMERCIAL_SERVICES: ServiceItem[] = [
       'Stage, lobby & banquet perimeter care',
       'Rapid turnaround team mobilization'
     ],
-    startingPrice: '₹5,500',
-    duration: '3 - 5 Hours',
     tag: 'Rapid'
   },
   {
@@ -244,8 +222,6 @@ export const COMMERCIAL_SERVICES: ServiceItem[] = [
       'All equipment & chemicals provided',
       'Strict contractual SLA & liability protection'
     ],
-    startingPrice: 'Custom Plan',
-    duration: 'Annual / Semi-Annual',
     tag: 'Turnkey'
   }
 ];
@@ -254,7 +230,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
   {
     step: '01',
     title: 'Choose Your Service',
-    description: 'Select your preferred residential tier or commercial scope with upfront transparent pricing.',
+    description: 'Select your preferred residential tier or commercial scope tailored to your requirements.',
     details: 'Customize room count, square footage, and specialized focus areas without hidden charges.'
   },
   {
@@ -284,8 +260,8 @@ export const WHY_CHOOSE_ITEMS: WhyChooseItem[] = [
   },
   {
     icon: 'Receipt',
-    title: 'Transparent Flat Pricing',
-    description: 'Zero hidden fees, zero surprise surcharges on arrival. The rate you see during booking is the exact amount you pay.'
+    title: 'Requirement-Based Pricing',
+    description: 'Zero hidden fees, zero surprise surcharges. We quote upfront based on your exact requirement, and that is the exact amount you pay.'
   },
   {
     icon: 'CheckCircle2',
@@ -347,8 +323,8 @@ export const FAQ_ITEMS = [
     a: 'Yes, 100%. Every Subra team member undergoes formal identity and police background verification, and is accompanied by an on-site supervisor.'
   },
   {
-    q: 'How long does a deep cleaning session take?',
-    a: 'A standard 2–3 BHK apartment deep clean takes approximately 3.5 to 5 hours with our dedicated 2-to-3 person crew.'
+    q: 'How do you determine pricing and worker allocation?',
+    a: 'Every property and task has distinct requirements. Our founding supervisor assesses your space needs, assigns the appropriate verified team, and provides a clear, transparent quote before starting.'
   },
   {
     q: 'What is your satisfaction guarantee policy?',

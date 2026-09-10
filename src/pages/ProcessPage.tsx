@@ -10,17 +10,24 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { PROCESS_STEPS } from '../data/siteData';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 interface ProcessPageProps {
   onOpenBooking: () => void;
 }
 
 export const ProcessPage: React.FC<ProcessPageProps> = ({ onOpenBooking }) => {
+  usePageMeta({
+    title: 'Our 42-Point Clinical Cleaning Protocol | SUBRA House Service',
+    description:
+      'Explore Subra’s 3-step scientific cleaning sequence, color-coded microfiber cross-contamination safeguards, and 42-point supervisor checklist across East Godavari.',
+  });
+
   return (
     <div className="bg-[#F8FAFC] min-h-screen">
       {/* Header Section */}
       <section className="pt-12 pb-14 sm:pt-16 sm:pb-20 bg-white border-b border-[#E2E8F0]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-[840px]">
+        <div className="max-w-[840px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-display font-extrabold text-[36px] sm:text-[46px] lg:text-[52px] text-[#17212B] leading-[1.08] tracking-[-0.03em]">
             Our Clinical Cleaning Process
           </h1>

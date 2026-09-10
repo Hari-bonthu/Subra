@@ -15,7 +15,7 @@ export const Testimonials: React.FC = () => {
           </h2>
 
           <p className="font-sans text-[15px] sm:text-[16px] text-[#64748B] leading-[1.6] mt-3">
-            Direct impressions from homeowners and workspace managers across Kakinada and Rajahmundry.
+            Direct impressions from homeowners and workspace managers across Rajahmundry, East Godavari, and Kakinada.
           </p>
         </div>
 

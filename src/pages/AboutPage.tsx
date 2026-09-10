@@ -1,17 +1,24 @@
 import React from 'react';
 import { ArrowRight, ShieldCheck, Sparkles, Heart, Users, Award } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 interface AboutPageProps {
   onOpenBooking: () => void;
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
+  usePageMeta({
+    title: 'About SUBRA House Service — Our Story & Standards | Rajahmundry',
+    description:
+      'Discover Subra House Service: clinical cleaning protocols, eco-safe chemistry, brand-new machinery, and founder direct supervision across East Godavari and Kakinada.',
+  });
+
   return (
     <div className="bg-[#F8FAFC] min-h-screen">
       {/* Header Section */}
       <section className="pt-12 pb-14 sm:pt-16 sm:pb-20 bg-white border-b border-[#E2E8F0]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-[840px]">
+        <div className="max-w-[840px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-display font-extrabold text-[36px] sm:text-[46px] lg:text-[52px] text-[#17212B] leading-[1.08] tracking-[-0.03em]">
             Clean Spaces. Better Living.
           </h1>
@@ -29,7 +36,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenBooking }) => {
               Why We Started Subra House Service
             </h2>
             <p className="font-sans text-[15px] text-[#64748B] leading-[1.7]">
-              Like many families and business owners in Kakinada and Rajahmundry, we struggled to find reliable, professional cleaning. Traditional house help lacked clinical tools, and conventional contractors frequently used harsh, corrosive acids that permanently etched expensive bathroom tiles and damaged chrome fittings.
+              Like many families and business owners across Rajahmundry, East Godavari, and Kakinada, we struggled to find reliable, professional cleaning. Traditional house help lacked clinical tools, and conventional contractors frequently used harsh, corrosive acids that permanently etched expensive bathroom tiles and damaged chrome fittings.
             </p>
             <p className="font-sans text-[15px] text-[#64748B] leading-[1.7]">
               We saw an urgent need for an honest, technology-enabled cleaning service that respects both the property owner and the cleaning squad. We invested in brand-new hospital-grade HEPA vacuum extractors, non-toxic bio-degradable cleaning compounds, and structured training protocols.

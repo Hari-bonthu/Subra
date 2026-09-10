@@ -40,7 +40,7 @@ export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenBooking }) => {
             </Button>
 
             <a
-              href="tel:+918842345678"
+              href="tel:+919704380535"
               className="w-full sm:w-auto"
             >
               <Button
@@ -50,7 +50,7 @@ export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenBooking }) => {
                 iconPosition="left"
                 className="w-full sm:w-auto bg-transparent border-white/25 text-white hover:bg-white/10 hover:border-white"
               >
-                Call +91 884 234 5678
+                Call +91 97043 80535
               </Button>
             </a>
           </div>

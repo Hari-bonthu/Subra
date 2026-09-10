@@ -3,6 +3,7 @@ import { ArrowRight, Search, CheckCircle2, Sparkles, Filter } from 'lucide-react
 import { ServiceCard } from '../components/ui/ServiceCard';
 import { Button } from '../components/ui/Button';
 import { RESIDENTIAL_SERVICES, COMMERCIAL_SERVICES } from '../data/siteData';
+import { usePageMeta } from '../hooks/usePageMeta';
 import type { ServiceItem } from '../types';
 
 interface ServicesPageProps {
@@ -14,6 +15,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
   onOpenBooking,
   onSelectService,
 }) => {
+  usePageMeta({
+    title: 'Professional House & Commercial Cleaning Services | SUBRA Rajahmundry',
+    description:
+      'Browse all 12 professional cleaning services offered by Subra across Rajahmundry, East Godavari & Kakinada. Standard, deep clean, shifting turnover, and office care.',
+  });
+
   const [filter, setFilter] = useState<'all' | 'residential' | 'commercial'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -32,7 +39,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
     <div className="bg-[#F8FAFC] min-h-screen">
       {/* Header Section */}
       <section className="pt-12 pb-14 sm:pt-16 sm:pb-20 bg-white border-b border-[#E2E8F0]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-[800px]">
+        <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-display font-extrabold text-[36px] sm:text-[46px] lg:text-[52px] text-[#17212B] leading-[1.08] tracking-[-0.03em]">
             Our Cleaning Services
           </h1>
